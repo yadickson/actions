@@ -1,12 +1,12 @@
 Actions
 =======
 
-* actions/version
+**actions/version**
 
 Step to get and share version.txt file only with version number
 
 
-** Use
+*How to use*
 
 ```yaml
 on: [push]
@@ -24,5 +24,4 @@ jobs:
         shell: bash
         env:
           PROJECT_VERSION: ${{ steps.version.outputs.version }}
-
 ```
