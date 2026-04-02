@@ -19,9 +19,9 @@ runs:
       uses: actions/upload-artifact@v6
       with:
         name: dependencies
-        paths:
-        - node_modules/
-        - package-lock.json
+        path: |
+          node_modules
+          package-lock.json
         retention-days: 1
 
     - name: installing python dependencies
@@ -37,7 +37,6 @@ runs:
       uses: actions/upload-artifact@v6
       with:
         name: dependencies
-        paths:
-        - requirements.txt
+        path: requirements.txt
         retention-days: 1
 
