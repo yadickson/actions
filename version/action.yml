@@ -36,5 +36,5 @@ runs:
       env:
         PROJECT_VERSION: ${{ env.VERSION }}
 
-    - uses: ./cache-save
+    - uses: yadickson/actions/cache-save@main
 

@@ -22,4 +22,4 @@ runs:
         poetry export --without-hashes --output requirements.txt
       shell: bash
 
-    - uses: ./cache-save
+    - uses: yadickson/actions/cache-save@main
