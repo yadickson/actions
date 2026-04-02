@@ -2,7 +2,7 @@ name: 'step-version-action'
 description: 'Create and share version.txt file'
 outputs:
   version:
-    description: "Random number"
+    description: "version number"
     value: ${{ steps.reading-version.outputs.version }}
 
 branding:
@@ -32,14 +32,8 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
-    - name: Sharing Version
-      uses: actions/cache@v4
-      with:
-        key: version.txt
-        path: version.txt
-
     - name: Upload Version
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: version
         path: version.txt
