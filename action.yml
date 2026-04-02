@@ -1,0 +1,39 @@
+name: 'step-version-action'
+description: 'Create and share version.txt file'
+outputs:
+  version:
+    description: "Random number"
+    value: ${{ steps.reading-version.outputs.version }}
+runs:
+  using: "composite"
+  steps:
+
+    - name: Getting Version
+      id: reading-version
+      run: |
+        if [ -f package.json ]; then 
+          export VERSION=$(grep 'version' package.json | cut -f2 -d":" | cut -f2 -d\")
+        fi
+        if [ -f pyproject.toml ]; then 
+          export VERSION=$(grep -E '^version' pyproject.toml | cut -f2 -d":" | cut -f2 -d\")
+        fi
+        echo $VERSION > version.txt
+        echo "version=$(echo $VERSION)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
+    - name: Sharing Version
+      uses: actions/cache@v4
+      with:
+        path: version.txt
+
+    - name: Upload Version
+      uses: actions/upload-artifact@v4
+      with:
+        name: version
+        path: version.txt
