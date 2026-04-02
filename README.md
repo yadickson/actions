@@ -1,10 +1,12 @@
-STEP VERSION ACTION
-===================
+Actions
+=======
+
+* actions/version
 
 Step to get and share version.txt file only with version number
 
 
-* Use
+** Use
 
 ```yaml
 on: [push]
@@ -17,7 +19,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v5
       - id: version
-        uses: yadickson/step-version-action@v1
+        uses: yadickson/version@REF
       - run: echo "project version ${PROJECT_VERSION}"
         shell: bash
         env:
