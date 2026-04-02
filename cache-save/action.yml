@@ -1,0 +1,33 @@
+name: 'actions/cache-save'
+description: 'Cache save files'
+
+branding:
+  icon: 'box'
+  color: 'green'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: cache version
+      if: hashFiles('version.txt') != ''
+      uses: actions/cache@v5
+      with:
+        path: version.txt
+        key: cache-version
+
+    - name: cache node dependencies
+      if: hashFiles('package-lock.json') != ''
+      uses: actions/cache@v5
+      with:
+        path: |
+          node_modules
+          package-lock.json
+        key: cache-dependencies
+
+    - name: cache python dependencies
+      if: hashFiles('requirements.txt') != ''
+      uses: actions/cache@v5
+      with:
+        path: requirements.txt
+        key: cache-dependencies
