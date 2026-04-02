@@ -15,14 +15,13 @@ runs:
       shell: bash
 
     - name: upload node dependencies
-      if: hashFiles('package.json') != ''
-      uses: actions/upload-artifact@v6
+      if: hashFiles('package-lock.json') != ''
+      uses: actions/cache@v4
       with:
-        name: dependencies
         path: |
           node_modules
           package-lock.json
-        retention-days: 1
+        key: ${{ runner.os }}-build
 
     - name: installing python dependencies
       if: hashFiles('pyproject.toml') != ''
@@ -33,10 +32,8 @@ runs:
       shell: bash
 
     - name: upload python dependencies
-      if: hashFiles('pyproject.toml') != ''
-      uses: actions/upload-artifact@v6
+      if: hashFiles('requirements.txt') != ''
+      uses: actions/cache@v4
       with:
-        name: dependencies
         path: requirements.txt
-        retention-days: 1
-
+        key: ${{ runner.os }}-build

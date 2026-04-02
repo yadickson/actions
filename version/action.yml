@@ -37,9 +37,9 @@ runs:
         PROJECT_VERSION: ${{ env.VERSION }}
 
     - name: upload version
-      uses: actions/upload-artifact@v6
+      if: hashFiles('version.txt') != ''
+      uses: actions/cache@v4
       with:
-        name: version
         path: version.txt
-        retention-days: 1
+        key: ${{ runner.os }}-version
 
