@@ -9,6 +9,11 @@ runs:
   using: "composite"
   steps:
 
+    - name: download dependencies
+      uses: actions/download-artifact@v8
+      with:
+        name: dependencies
+
     - name: building node project
       if: hashFiles('package.json') != ''
       run: npm run build
