@@ -9,7 +9,7 @@ runs:
   using: "composite"
   steps:
 
-    - uses: yadickson/actions/cache-load@main
+    - uses: yadickson/actions-steps/cache-dependencies@v1
 
     - name: testing node project
       if: hashFiles('package.json') != ''

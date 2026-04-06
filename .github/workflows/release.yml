@@ -1,0 +1,38 @@
+---
+name: "tagged-release"
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.ACTIONS_TOKEN }}
+          make_latest: true
+
+  tagged:
+    name: tagged
+    needs: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: tagged
+        run: |
+          VERSION=$(echo "${{ github.ref_name }}" | awk -F. '{print $1}')
+          gh release delete "${VERSION}" --yes || true
+          gh release create "${VERSION}"
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
