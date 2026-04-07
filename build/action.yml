@@ -9,6 +9,8 @@ runs:
   using: "composite"
   steps:
 
+    - uses: actions/checkout@v5
+
     - id: project_type
       uses: yadickson/actions-steps/project-type@v1
 
