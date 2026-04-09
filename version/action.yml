@@ -19,10 +19,25 @@ runs:
       uses: yadickson/actions-steps/project-type@v1
 
     - if: steps.project_type.outputs.type == 'node'
+      id: node-version
       uses: yadickson/actions-steps/project-version/node@v1
 
     - if: steps.project_type.outputs.type == 'python'
+      id: python-version
       uses: yadickson/actions-steps/project-version/python@v1
+
+    - run: echo "version=${{ steps.node-version.outputs.type }}${{ steps.node-version.outputs.type }}" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - run: echo "VERSION=${{ steps.node-version.outputs.type }}${{ steps.node-version.outputs.type }}" >> $GITHUB_ENV
+      shell: bash
+
+    - id: reading-version
+      run: echo "version=${{ env.VERSION }}" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - run: echo "${{ env.VERSION }}" > version.txt
+      shell: bash
 
     - uses: yadickson/actions-steps/cache-version@v1
 
