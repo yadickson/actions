@@ -3,7 +3,8 @@ description: 'Building badge project'
 inputs:
   version:
     description: version
-    required: true
+    required: false
+    default: ''
 
   gist-id:
     description: gist id
