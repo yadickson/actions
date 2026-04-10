@@ -25,18 +25,19 @@ runs:
     - uses: yadickson/actions-steps/cache-dependencies@v1
 
     - if: steps.project_type.outputs.type == 'node'
-      id: node-testing
       uses: yadickson/actions-steps/project-test/node@v1
       continue-on-error: true
 
     - if: steps.project_type.outputs.type == 'python'
-      id: python-testing
       uses: yadickson/actions-steps/project-test/python@v1
       continue-on-error: true
 
     - if: steps.project_type.outputs.type == 'csharp'
-      id: csharp-testing
       uses: yadickson/actions-steps/project-test/csharp@v1
+      continue-on-error: true
+
+    - if: steps.project_type.outputs.type == 'maven'
+      uses: yadickson/actions-steps/project-test/maven@v1
       continue-on-error: true
 
     - if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)

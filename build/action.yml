@@ -24,3 +24,6 @@ runs:
 
     - if: steps.project_type.outputs.type == 'csharp'
       uses: yadickson/actions-steps/project-build/csharp@v1
+
+    - if: steps.project_type.outputs.type == 'maven'
+      uses: yadickson/actions-steps/project-build/maven@v1

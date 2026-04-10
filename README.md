@@ -139,24 +139,3 @@ jobs:
           gist-id: ${{ secrets.GIST_ID }}
           gist-token: ${{ secrets.GIST_TOKEN }}
 ```
-
-**actions/badge**
-
-Step to create badge files into gist
-
-
-*How to use*
-
-```yaml
-on: [push]
-
-jobs:
-  test_step_badge_action:
-    runs-on: ubuntu-latest
-    name: creating badge files
-    steps:
-      - uses: yadickson/badge@REF
-        with:
-          gist-id: ${{ secrets.GIST_ID }}
-          gist-token: ${{ secrets.GIST_TOKEN }}
-```
