@@ -34,6 +34,11 @@ runs:
       uses: yadickson/actions-steps/project-test/python@v1
       continue-on-error: true
 
+    - if: steps.project_type.outputs.type == 'csharp'
+      id: csharp-testing
+      uses: yadickson/actions-steps/project-test/csharp@v1
+      continue-on-error: true
+
     - if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
       id: badge-test
       uses: yadickson/actions-steps/project-badge/test@v1
@@ -42,7 +47,7 @@ runs:
         gist-token: ${{ inputs.gist-token }}
 
     - name: testing project fail
-      if: steps.node-testing.outcome == 'failure' || steps.python-testing.outcome == 'failure'
+      if: ${{ failure() }}
       run: exit 1
       shell: bash
 

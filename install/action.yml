@@ -20,4 +20,7 @@ runs:
     - if: steps.project_type.outputs.type == 'python'
       uses: yadickson/actions-steps/project-install/python@v1
 
+    - if: steps.project_type.outputs.type == 'csharp'
+      uses: yadickson/actions-steps/project-install/csharp@v1
+
     - uses: yadickson/actions-steps/cache-dependencies@v1

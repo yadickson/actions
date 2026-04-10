@@ -21,3 +21,6 @@ runs:
 
     - if: steps.project_type.outputs.type == 'python'
       uses: yadickson/actions-steps/project-build/python@v1
+
+    - if: steps.project_type.outputs.type == 'csharp'
+      uses: yadickson/actions-steps/project-build/csharp@v1
